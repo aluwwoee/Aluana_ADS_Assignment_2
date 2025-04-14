@@ -1,3 +1,4 @@
+// MyMinHeap.java
 public class MyMinHeap<T extends Comparable<T>> {
     private final MyArrayList<T> list = new MyArrayList<>();
 
@@ -9,17 +10,21 @@ public class MyMinHeap<T extends Comparable<T>> {
     public T extractMin() {
         if (list.isEmpty()) return null;
         T min = list.get(0);
-        list.add(0, list.remove(list.size() - 1));
-        heapifyDown(0);
+        T last = list.remove(list.size() - 1);
+        if (!list.isEmpty()) {
+            list.add(0, last);
+            heapifyDown(0);
+        }
         return min;
     }
 
     private void heapifyUp(int index) {
         while (index > 0) {
             int parent = (index - 1) / 2;
-            if (list.get(index).compareTo(list.get(parent)) < 0) swap(index, parent);
-            else break;
-            index = parent;
+            if (list.get(index).compareTo(list.get(parent)) < 0) {
+                swap(index, parent);
+                index = parent;
+            } else break;
         }
     }
 
@@ -37,10 +42,13 @@ public class MyMinHeap<T extends Comparable<T>> {
     }
 
     private void swap(int i, int j) {
-        T tmp = list.get(i);
-        list.add(i, list.remove(j));
-        list.add(j, tmp);
+        T temp = list.get(i);
+        list.add(i, list.remove(j));  // place j to i
+        list.remove(i + 1);           // remove old i
+        list.add(j, temp);            // place i to j
     }
 
-    public boolean isEmpty() { return list.isEmpty(); }
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
 }

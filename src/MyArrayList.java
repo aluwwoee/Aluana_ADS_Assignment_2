@@ -13,6 +13,16 @@ public class MyArrayList<T> implements MyList<T> {
         elements[size++] = item;
     }
 
+    public void add(int index, T item) {
+        if (index < 0 || index > size) throw new IndexOutOfBoundsException();
+        if (size == elements.length) resize();
+        for (int i = size; i > index; i--) {
+            elements[i] = elements[i - 1];
+        }
+        elements[index] = item;
+        size++;
+    }
+
     private void resize() {
         Object[] newElements = new Object[elements.length * 2];
         for (int i = 0; i < elements.length; i++) newElements[i] = elements[i];

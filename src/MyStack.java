@@ -5,4 +5,6 @@ public class MyStack<T> {
     public T pop() { return list.remove(list.size() - 1); }
     public T peek() { return list.get(list.size() - 1); }
     public boolean isEmpty() { return list.isEmpty(); }
+    public int size() { return list.size(); }
+    public void clear() { list.clear(); }
 }

@@ -5,4 +5,6 @@ public class MyQueue<T> {
     public T dequeue() { return list.remove(0); }
     public T peek() { return list.get(0); }
     public boolean isEmpty() { return list.isEmpty(); }
+    public int size() { return list.size(); }
+    public void clear() { list.clear(); }
 }
