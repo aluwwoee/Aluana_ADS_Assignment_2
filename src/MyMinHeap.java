@@ -42,11 +42,14 @@ public class MyMinHeap<T extends Comparable<T>> {
     }
 
     private void swap(int i, int j) {
-        T temp = list.get(i);
-        list.add(i, list.remove(j));  // place j to i
-        list.remove(i + 1);           // remove old i
-        list.add(j, temp);            // place i to j
+        if (i == j) return; // ничего не делаем
+        T tmp = list.get(i);
+        T replaced = list.remove(j);
+        list.add(j, tmp);
+        list.remove(i);
+        list.add(i, replaced);
     }
+
 
     public boolean isEmpty() {
         return list.isEmpty();
